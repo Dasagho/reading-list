@@ -54,7 +54,7 @@ export const BookGrid: React.FC<GridProps> = ({ library, setBookList }) => {
       >
         {
           availableBooks?.map(book =>
-            <BookCard book={book.book} key={book.book.ISBN} />
+            <BookCard book={book.book} key={book.book.ISBN} toggleBook={toggleBook} />
           )
         }
       </main>
