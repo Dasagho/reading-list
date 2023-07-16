@@ -6,8 +6,9 @@ interface CardProps {
 }
 
 function handleDragStart (e: React.DragEvent<HTMLButtonElement>): void {
-  console.log('Estoy siendo arrastrado', e.target.getAttribute('data-isbn'))
-  e.dataTransfer.setData('text/plain', e.target.getAttribute('data-isbn'))
+  const ISBN = e.currentTarget.getAttribute('data-isbn')
+  if (ISBN === null) return
+  e.dataTransfer.setData('text/plain', ISBN)
 }
 
 export const BookCard: React.FC<CardProps> = ({ book }) => {

@@ -17,7 +17,7 @@ export const App: React.FC = () => {
   const [allBooks, setAllBooks] = useLocalStorage('bookData', getBooksDistribution())
 
   useEffect(() => {
-    const handleStorageChange = (event: StorageEvent): void => {
+    const handleStorageChange = (): void => {
       const item = window.localStorage.getItem('bookData')
       if (item !== null) {
         setAllBooks(JSON.parse(item))
