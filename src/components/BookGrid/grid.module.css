@@ -1,7 +1,8 @@
 .main {
-  width: 70%;
+  width: 85%;
   outline: solid red;
-
+  overflow: auto;
+  scrollbar-width: none;
 }
 
 .header {
