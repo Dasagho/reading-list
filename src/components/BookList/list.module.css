@@ -1,4 +1,12 @@
 .list {
   width: 30%;
   outline: solid blue;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 30px;
+  overflow-y: scroll;
+  padding-top: 30px;
 }

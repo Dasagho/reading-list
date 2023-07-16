@@ -1,9 +1,24 @@
-.grid {
+.main {
   width: 70%;
   outline: solid red;
+
 }
 
 .header {
   width: 100%;
+  height: 60px;
   background-color: yellow;
+  gap: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 18px;
+  padding: 30px 0;
 }

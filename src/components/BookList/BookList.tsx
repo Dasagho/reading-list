@@ -10,7 +10,6 @@ interface ListProps {
 export const BookList: React.FC<ListProps> = ({ bookList, setBookList }) => {
   function handleDrop (e: React.DragEvent<HTMLButtonElement>): void {
     const ISBNBook = e.dataTransfer.getData('text/plain')
-    console.log('Se ha soltado el libro', ISBNBook)
     if (bookList.bookList.some(book => book.book.ISBN === ISBNBook)) return
     toggleBook(e.dataTransfer.getData('text/plain'))
   }

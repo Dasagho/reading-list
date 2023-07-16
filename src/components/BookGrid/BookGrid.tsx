@@ -32,11 +32,10 @@ export const BookGrid: React.FC<GridProps> = ({ library, setBookList }) => {
 
   const availableBooks = library.library
     ?.filter(book => genere === '' || book?.book.genre === genere)
-  console.log(availableBooks)
 
   return (
     <section
-      className={styles.grid}
+      className={styles.main}
       onDrop={handleDrop}
       onDragOver={e => { e.preventDefault() }}
     >
@@ -47,14 +46,18 @@ export const BookGrid: React.FC<GridProps> = ({ library, setBookList }) => {
         Libros en la lista: {library.bookList.length}
         <select name="genere" id="" value={genere} onChange={e => { setGenere(e.target.value) }}>
           <option value="">Selecciona un género</option>
-          { bookService.getGeneres().map(genere => <option key={genere}>{genere}</option>) }
+          {bookService.getGeneres().map(genere => <option key={genere}>{genere}</option>)}
         </select>
       </header>
-      {
-        availableBooks?.map(book =>
+      <main
+        className={styles.grid}
+      >
+        {
+          availableBooks?.map(book =>
             <BookCard book={book.book} key={book.book.ISBN} />
-        )
-      }
+          )
+        }
+      </main>
     </section>
   )
 }
