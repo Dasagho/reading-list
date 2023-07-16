@@ -10,16 +10,17 @@ interface ListProps {
 export const BookList: React.FC<ListProps> = ({ bookList, setBookList }) => {
   function handleDrop (e: React.DragEvent<HTMLButtonElement>): void {
     const ISBNBook = e.dataTransfer.getData('text/plain')
+    console.log('Se ha soltado el libro', ISBNBook)
     if (bookList.bookList.some(book => book.book.ISBN === ISBNBook)) return
     toggleBook(e.dataTransfer.getData('text/plain'))
   }
 
   function toggleBook (toggleISBN: string): void {
     const prevState = bookList
-    const bookTarget = prevState.library.filter(book => book.book.ISBN === toggleISBN)[0]
+    const bookTarget = prevState.library.filter(book => book?.book?.ISBN === toggleISBN)[0]
     setBookList(
       {
-        library: prevState.library.filter(book => book.book.ISBN !== bookTarget.book.ISBN),
+        library: prevState.library.filter(book => book?.book?.ISBN !== bookTarget?.book.ISBN),
         bookList: [...prevState.bookList, bookTarget]
       }
     )

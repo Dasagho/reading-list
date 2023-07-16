@@ -15,23 +15,24 @@ export const BookGrid: React.FC<GridProps> = ({ library, setBookList }) => {
   const [genere, setGenere] = useState('')
   function handleDrop (e: React.DragEvent<HTMLButtonElement>): void {
     const ISBNBook = e.dataTransfer.getData('text/plain')
-    if (library.library.some(book => book.book.ISBN === ISBNBook)) return
+    if (library.library.some(book => book?.book.ISBN === ISBNBook)) return
     toggleBook(e.dataTransfer.getData('text/plain'))
   }
 
   function toggleBook (toggleISBN: string): void {
     const prevState = library
-    const bookTarget = prevState.bookList.filter(book => book.book.ISBN === toggleISBN)[0]
+    const bookTarget = prevState.bookList.filter(book => book?.book?.ISBN === toggleISBN)[0]
     setBookList(
       {
         library: [...prevState.library, bookTarget],
-        bookList: prevState.bookList.filter(book => book?.book.ISBN !== bookTarget?.book.ISBN)
+        bookList: prevState.bookList.filter(book => book?.book?.ISBN !== bookTarget?.book.ISBN)
       }
     )
   }
 
   const availableBooks = library.library
-    ?.filter(book => genere === '' || book.book.genre === genere)
+    ?.filter(book => genere === '' || book?.book.genre === genere)
+  console.log(availableBooks)
 
   return (
     <section

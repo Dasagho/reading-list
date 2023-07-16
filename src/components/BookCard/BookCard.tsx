@@ -15,6 +15,7 @@ export const BookCard: React.FC<CardProps> = ({ book }) => {
   const { cover, ISBN } = book
   return (
     <button
+      data-isbn={ISBN}
       className={style.card}
       draggable={true}
       onDragStart={handleDragStart}
