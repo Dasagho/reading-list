@@ -1,0 +1,9 @@
+.grid {
+  width: 70%;
+  outline: solid red;
+}
+
+.header {
+  width: 100%;
+  background-color: yellow;
+}
