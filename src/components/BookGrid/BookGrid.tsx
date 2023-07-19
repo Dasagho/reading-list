@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { type LibraryElement, type BooksDristribution } from '../../model/book'
+import { type LibraryElement } from '../../model/book'
 import BookService from '../../services/books'
 import { BookCard } from '../BookCard/BookCard'
 import styles from './grid.module.css'
@@ -8,11 +8,12 @@ interface GridProps {
   bookList: LibraryElement[]
   library: LibraryElement[]
   toggleBook: (toogleISBN: string) => void
+  reOrderCallBack: (prevISBNBook: string, ISBNBook: string) => void
 }
 
 const bookService = new BookService()
 
-export const BookGrid: React.FC<GridProps> = ({ library, bookList, toggleBook }) => {
+export const BookGrid: React.FC<GridProps> = ({ library, bookList, toggleBook, reOrderCallBack }) => {
   const [genere, setGenere] = useState('')
   function handleDrop (e: React.DragEvent<HTMLButtonElement>): void {
     const ISBNBook = e.dataTransfer.getData('text/plain')
@@ -43,7 +44,7 @@ export const BookGrid: React.FC<GridProps> = ({ library, bookList, toggleBook })
       >
         {
           availableBooks?.map(book =>
-            <BookCard book={book.book} key={book.book.ISBN} toggleBook={toggleBook} />
+            <BookCard book={book.book} key={book.book.ISBN} toggleBook={toggleBook} reOrderCallBack={reOrderCallBack} />
           )
         }
       </main>

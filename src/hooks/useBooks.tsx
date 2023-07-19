@@ -6,6 +6,7 @@ export interface BookHook {
   library: LibraryElement[]
   bookList: LibraryElement[]
   toggleBook: (toggleISBN: string) => void
+  reOrderBook: (prevISBNBook: string, ISBNBook: string) => void
 }
 
 const initialBookDistribution: BooksDristribution = {
@@ -35,9 +36,36 @@ export function useBooks (): BookHook {
     setAllBooks({ library: newLibrary, bookList: newBookList })
   }
 
+  function reOrderBook (prevISBNBook: string, ISBNBook: string): void {
+    console.log(prevISBNBook, ISBNBook)
+    const newLibrary = allBooks.library
+    const newBookList = allBooks.bookList
+
+    const prevIndex = newLibrary.findIndex(book => book.book.ISBN === prevISBNBook) ||
+      newBookList.findIndex(book => book.book.ISBN === prevISBNBook)
+
+    let bookToInsert
+    const libraryIndex = allBooks.library.findIndex(book => book.book.ISBN === ISBNBook)
+    if (libraryIndex !== -1) {
+      bookToInsert = allBooks.library[libraryIndex]
+      newLibrary.splice(libraryIndex, 1)
+      newLibrary.splice(prevIndex, 0, bookToInsert)
+    }
+
+    const bookListLindex = allBooks.bookList.findIndex(book => book.book.ISBN === ISBNBook)
+    if (bookListLindex !== -1) {
+      bookToInsert = allBooks.bookList[bookListLindex]
+      newBookList.splice(bookListLindex, 1)
+      newBookList.splice(prevIndex, 0, bookToInsert)
+    }
+
+    setAllBooks({ library: newLibrary, bookList: newBookList })
+  }
+
   return {
     library: allBooks.library,
     bookList: allBooks.bookList,
-    toggleBook
+    toggleBook,
+    reOrderBook
   }
 }

@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useBooks } from './hooks/useBooks'
 
 export const App: React.FC = () => {
-  const { bookList, library, toggleBook } = useBooks()
+  const { bookList, library, toggleBook, reOrderBook } = useBooks()
 
   useEffect(() => {
     const handleStorageChange = (): void => {
@@ -26,8 +26,8 @@ export const App: React.FC = () => {
     <main
       className={styles.main}
     >
-      <BookGrid library={library} toggleBook={toggleBook} bookList={bookList} />
-      <BookList bookList={bookList} toggleBook={toggleBook} />
+      <BookGrid library={library} toggleBook={toggleBook} bookList={bookList} reOrderCallBack={reOrderBook} />
+      <BookList bookList={bookList} toggleBook={toggleBook} reOrderCallBack={reOrderBook} />
     </main>
   )
 }

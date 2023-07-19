@@ -5,9 +5,10 @@ import { BookCard } from '../BookCard/BookCard'
 interface ListProps {
   bookList: LibraryElement[]
   toggleBook: (toggleISBN: string) => void
+  reOrderCallBack: (prevISBNBook: string, ISBNBook: string) => void
 }
 
-export const BookList: React.FC<ListProps> = ({ bookList, toggleBook }) => {
+export const BookList: React.FC<ListProps> = ({ bookList, toggleBook, reOrderCallBack }) => {
   function handleDrop (e: React.DragEvent<HTMLButtonElement>): void {
     const ISBNBook = e.dataTransfer.getData('text/plain')
     if (bookList.some(book => book.book.ISBN === ISBNBook)) return
@@ -20,7 +21,7 @@ export const BookList: React.FC<ListProps> = ({ bookList, toggleBook }) => {
       onDrop={handleDrop}
       onDragOver={e => { e.preventDefault() }}
     >
-      {bookList?.map(book => <BookCard key={book.book.ISBN} book={book.book} toggleBook={toggleBook} />)}
+      {bookList?.map(book => <BookCard key={book.book.ISBN} book={book.book} toggleBook={toggleBook} reOrderCallBack={reOrderCallBack} />)}
     </aside>
   )
 }
