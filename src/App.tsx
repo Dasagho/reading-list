@@ -1,20 +1,11 @@
 import { BookGrid } from './components/BookGrid/BookGrid'
 import { BookList } from './components/BookList/BookList'
-import { type BooksDristribution } from './model/book'
-import BookService from './services/books'
 import styles from './App.module.css'
-import { useLocalStorage } from './hooks/useLocalStorage'
 import { useEffect } from 'react'
-
-function getBooksDistribution (): BooksDristribution {
-  return {
-    library: new BookService().getBooks().library,
-    bookList: []
-  }
-}
+import { useBooks } from './hooks/useBooks'
 
 export const App: React.FC = () => {
-  const [allBooks, setAllBooks] = useLocalStorage('bookData', getBooksDistribution())
+  const { bookList, library, toggleBook } = useBooks()
 
   useEffect(() => {
     const handleStorageChange = (): void => {
@@ -35,8 +26,8 @@ export const App: React.FC = () => {
     <main
       className={styles.main}
     >
-      <BookGrid library={allBooks} setBookList={setAllBooks} />
-      <BookList bookList={allBooks} setBookList={setAllBooks} />
+      <BookGrid library={library} toggleBook={toggleBook} bookList={bookList} />
+      <BookList bookList={bookList} toggleBook={toggleBook} />
     </main>
   )
 }
